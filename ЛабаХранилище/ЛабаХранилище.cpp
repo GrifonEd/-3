@@ -18,8 +18,8 @@ public:
     virtual void show() {
         cout <<endl<< "Абстрактная фигура" << endl;
     }
-    ~Shape() {
-        cout << "Фигура удалилась" << endl;
+    virtual ~Shape() {
+        cout << "Фигура удалилась\n" << endl;
     }
 
 };
@@ -53,7 +53,7 @@ public:
         objects = object1;
         cout << "Добавили объект ";
         object->show();
-        cout << "В память c индексом  " << size - 1 << endl;
+        cout << "В память c индексом  " << size - 1 << endl<<endl;
     }
 
     int getCount() {
@@ -80,7 +80,7 @@ public:
         cout << "Точка с координатами( " << x << ", " << y << " )"<<endl;
     }
     ~Point() {
-        cout << "Точка удалилась";
+        cout << "Точка удалилась с координатами " << x << " , " << y << endl;
     }
 
 };
@@ -99,14 +99,17 @@ public :
         cout << endl;
     }
     ~Section() {
+        cout << "Отрезок удалился с точками : "; p1->show(); p2->show();
         delete p1;
         delete p2;
+        cout << endl;
     }
 };
 
 
 int main()
 {
+    Shape* q;
     srand(time(NULL));
     setlocale(LC_ALL, "Rus");
     MyStorage storage(10);
@@ -122,5 +125,44 @@ int main()
     }
 
 
-    cout <<endl<< storage.getCount() << " - Это размер хранилища" << endl;
+    cout << endl << storage.getCount() << " - Это размер хранилища" << endl << endl;
+
+    for (int i = 0; i < 100; i++) {
+        int luck = rand() % 4 + 1;
+        switch (luck) {
+
+        case 1:
+            luck = rand() % 2 + 1;
+            if (luck == 1) {
+                q = new Point(rand() % 10, rand() % 10);
+            }
+            else
+                q = new Section();
+            break;
+
+        case 2:
+            luck = rand() % 2 + 1;
+            if (luck == 1) {
+                q = new Point(rand() % 10, rand() % 10);
+            }
+            else
+                q = new Section();
+            storage.add(q);
+            break;
+            
+        case 3 :
+            cout << "Используем метод show\n";
+            storage.GetObject(rand() % storage.getCount()).show();
+            cout << endl;
+            break;
+
+        case 4:
+            storage.delete_obj(rand() % storage.getCount());
+            cout << endl;
+            break;
+        }
+    }
+
+    system("pause");
+    system("cls");
 }
