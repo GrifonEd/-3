@@ -95,14 +95,17 @@ public :
         p2 = new Point(rand() % 10, (rand() % 10));
     }
     void show() {
-        cout <<endl << "Отрезок с точками : "; p1->show(); p2->show();
+        cout << endl << "Отрезок с точками : ";
+            cout << endl;
+            ; p1->show(); p2->show();
         cout << endl;
     }
     ~Section() {
-        cout << "Отрезок удалился с точками : "; p1->show(); p2->show();
+        cout << "Отрезок с точками : ";
+        cout << endl; 
+        p1->show(); p2->show();
         delete p1;
         delete p2;
-        cout << endl;
     }
 };
 
@@ -127,6 +130,7 @@ int main()
 
     cout << endl << storage.getCount() << " - Это размер хранилища" << endl << endl;
 
+    unsigned int start_time = clock();
     for (int i = 0; i < 100; i++) {
         int luck = rand() % 4 + 1;
         switch (luck) {
@@ -162,7 +166,93 @@ int main()
             break;
         }
     }
+    unsigned int end_time = clock();
+    unsigned int search_time = end_time - start_time;
+    cout << "Время работы программы = " << search_time << endl;
+    system("pause");
+    system("cls");
 
+     start_time = clock();
+    for (int i = 0; i < 10000; i++) {
+        int luck = rand() % 4 + 1;
+        switch (luck) {
+
+        case 1:
+            luck = rand() % 2 + 1;
+            if (luck == 1) {
+                q = new Point(rand() % 10, rand() % 10);
+            }
+            else
+                q = new Section();
+            break;
+
+        case 2:
+            luck = rand() % 2 + 1;
+            if (luck == 1) {
+                q = new Point(rand() % 10, rand() % 10);
+            }
+            else
+                q = new Section();
+            storage.add(q);
+            break;
+
+        case 3:
+            cout << "Используем метод show\n";
+            storage.GetObject(rand() % storage.getCount()).show();
+            cout << endl;
+            break;
+
+        case 4:
+            storage.delete_obj(rand() % storage.getCount());
+            cout << endl;
+            break;
+        }
+    }
+    end_time = clock();
+     search_time = end_time - start_time;
+    cout << "Время работы программы = " << search_time << endl;
+    system("pause");
+    system("cls");
+
+    start_time = clock();
+    for (int i = 0; i < 100; i++) {
+        int luck = rand() % 4 + 1;
+        switch (luck) {
+
+        case 1:
+            luck = rand() % 2 + 1;
+            if (luck == 1) {
+                q = new Point(rand() % 10, rand() % 10);
+            }
+            else
+                q = new Section();
+            break;
+
+        case 2:
+            luck = rand() % 2 + 1;
+            if (luck == 1) {
+                q = new Point(rand() % 10, rand() % 10);
+            }
+            else
+                q = new Section();
+            storage.add(q);
+            break;
+
+        case 3:
+            cout << "Используем метод show\n";
+            storage.GetObject(rand() % storage.getCount()).show();
+            cout << endl;
+            break;
+
+        case 4:
+            storage.delete_obj(rand() % storage.getCount());
+            cout << endl;
+            break;
+        }
+    }
+   end_time = clock();
+    search_time = end_time - start_time;
+    cout << "Время работы программы = " << search_time << endl;
     system("pause");
     system("cls");
 }
